@@ -20,25 +20,22 @@ class CategoriaController {
 
     public function store() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nombre      = trim($_POST['nombre'] ?? '');
-            $descripcion = trim($_POST['descripcion'] ?? '');
+            $nombre      = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
 
             if (!empty($nombre)) {
                 $this->categoriaModel->create($nombre, $descripcion);
-                header('Location: /unlz-backend-mvc-base-2026/categorias');
-                exit;
             }
         }
+        header('Location: /unlz-backend-mvc-base-2026/categorias');
+        exit;
     }
 
     public function delete() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $id = $_POST['id'] ?? null;
-            if ($id) {
-                $this->categoriaModel->delete($id);
-            }
-            header('Location: /unlz-backend-mvc-base-2026/categorias');
-            exit;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
+            $this->categoriaModel->delete($_POST['id']);
         }
+        header('Location: /unlz-backend-mvc-base-2026/categorias');
+        exit;
     }
 }
