@@ -1,0 +1,17 @@
+# Desactivar la vista de directorios por seguridad
+Options -Indexes
+
+# Establecer el archivo por defecto al entrar a una carpeta
+DirectoryIndex index.php
+
+# Activar el motor de reescritura de URLs
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Si la petición NO es un archivo real (css, js, img) ni una carpeta real...
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Redirigir todo al index.php pasándole la ruta como parámetro o manteniendo la URL
+    RewriteRule ^ index.php [L]
+</IfModule>
