@@ -1,0 +1,21 @@
+# Archivo de entorno local (variables sensibles)
+.env
+
+# Dependencias de librerías de terceros
+vendor/
+
+# Archivos de subida de usuarios en entorno local
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Configuraciones de editores e IDEs
+.vscode/
+.idea/
+
+# Logs del servidor
+*.log
