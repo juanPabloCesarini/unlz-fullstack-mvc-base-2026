@@ -25,6 +25,22 @@ class ProductoModel extends Model {
     }
 
     /**
+     * Obtener productos filtrados por una Subcategoría específica
+     */
+    public function getBySubcategory($subcategoria_id) {
+        $sql = "SELECT p.*, s.nombre AS subcategoria_nombre 
+                FROM {$this->table} p
+                INNER JOIN subcategorias s ON p.subcategoria_id = s.id
+                WHERE p.subcategoria_id = :subcategoria_id 
+                  AND p.deleted_at IS NULL 
+                  AND s.deleted_at IS NULL
+                ORDER BY p.id DESC";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':subcategoria_id' => $subcategoria_id]);
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Insertar un nuevo producto
      */
     public function create($subcategoria_id, $nombre, $descripcion, $precio, $stock, $imagen) {
